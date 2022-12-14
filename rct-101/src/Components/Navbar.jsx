@@ -34,7 +34,9 @@ import {
   FormLabel,
   Input,
   Select,
-  
+  FormErrorMessage,
+  FormHelperText,
+  useToast
 } from '@chakra-ui/react';
 import { HamburgerIcon, CloseIcon, ChevronDownIcon} from '@chakra-ui/icons';
 
@@ -42,9 +44,18 @@ import { HamburgerIcon, CloseIcon, ChevronDownIcon} from '@chakra-ui/icons';
 
 export default function Navbar() {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const { 
+    isOpen: isOpenModal, 
+    onOpen: onOpenModal, 
+    onClose: onCloseModal 
+} = useDisclosure()
   const [size, setSize] = useState('')
   const [placement, setPlacement] = useState('right')
   const [modalSize,setModalSize]=useState('lg')
+  const toast = useToast()
+  
+
+  
 
   const [formstate, setFormState]=useState({
     selectValue: "",
@@ -55,19 +66,33 @@ export default function Navbar() {
     lastName: "",
   })
 
+ 
+  
+  
+
   const handleChange=(e)=>{
     const val=e.target.value
     setFormState({...formstate,[e.target.name]: val})
   }
 
   const handleSubmit=async(e)=>{
+    
     e.preventDefault()
 
     try {
-      const response=await fetch()
+      const response=await fetch(` http://localhost:8000/signupData`,{
+        method: 'POST',
+        body: JSON.stringify(formstate),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
+      const data= await response.json()
+      setFormState("")
     } catch (error) {
-      
+       console.log(error)
     }
+   
   }
   
  
@@ -118,7 +143,7 @@ export default function Navbar() {
               </MenuButton>
               <MenuList>
                 <MenuItem>SIGN IN</MenuItem>
-                <MenuItem onClick={onOpen}>SIGN UP</MenuItem>
+                <MenuItem onClick={onOpenModal}>SIGN UP</MenuItem>
                 
               </MenuList>
               </Menu>
@@ -194,8 +219,8 @@ export default function Navbar() {
      <Modal
         initialFocusRef={initialRef}
         finalFocusRef={finalRef}
-        onClose={onClose}
-        isOpen={isOpen}
+        onClose={onCloseModal}
+        isOpen={isOpenModal}
         size={modalSize}
       >
         <ModalOverlay />
@@ -205,12 +230,13 @@ export default function Navbar() {
           <DrawerFooter borderBottomWidth='1px'></DrawerFooter>
 
           <ModalBody pb={6}>
+            <form onSubmit={handleSubmit} id="new-form">
             <Stack spacing={4}>
             <HStack>
              
              <Box>
             <FormControl>
-              <Select type="select" name="selectValue" onChange={handleChange}>
+              <Select type="select" name="selectValue" onChange={handleChange} required>
                 <option value="+91">+91</option>
                 <option value="+97">+97</option>
                 <option value="+89">+89</option>
@@ -220,8 +246,9 @@ export default function Navbar() {
             </Box>
 
             <Box>
-              <FormControl>
-              <Input width="175%" type="number" name="phone" value={formstate.phone} ref={initialRef} placeholder='Mobile Number' isRequired/>
+              <FormControl >
+              <Input width="175%" type="number" name="phone" value={formstate.phone} ref={initialRef} placeholder='Mobile Number' onChange={handleChange} required/>
+              
               </FormControl>
             </Box>
             
@@ -230,44 +257,57 @@ export default function Navbar() {
 
             <FormControl mt={13} >
               
-              <Input width="100%" name="email" value={formstate.email} placeholder='Email Address' type="text" isRequired  />
+              <Input width="100%" name="email" value={formstate.email} placeholder='Email Address' type="text" onChange={handleChange}  required />
+             
             </FormControl>
 
             <FormControl mt={13} >
               
-              <Input width="100%" name="password" value={formstate.password} placeholder='Password' type="number" isRequired  />
+              <Input width="100%" name="password" value={formstate.password} placeholder='Password' onChange={handleChange} type="number" required />
+            
             </FormControl>
 
             <HStack>
              
              <Box>
-            <FormControl mt={13}>
-            <Input width="100%" name="firstName" value={formstate.firstName} placeholder='First Name' type="text" isRequired  />
-             
+            <FormControl mt={13} >
+            <Input width="100%" name="firstName" value={formstate.firstName} placeholder='First Name' type="text" onChange={handleChange}  required />
+           
             </FormControl>
             </Box>
 
             <Box>
-              <FormControl mt={13}>
-               <Input width="110%" name="lastName" value={formstate.lastName} placeholder='Last Name' type="text" isRequired  />
-                
+              <FormControl mt={13} >
+               <Input width="110%" name="lastName" value={formstate.lastName} placeholder='Last Name' onChange={handleChange} type="text"   required/>
+               
               </FormControl>
             </Box>
             
             </HStack>
             </Stack>
+            </form>
           </ModalBody>
         
           <ModalFooter>
             
             <Button onClick={onClose}>Cancel</Button>
-            <Button colorScheme='blue' ml={6} >
-              VERIFY WITH OTP
+            <Button colorScheme='blue' ml={6} type="submit" form="new-form"  onClick={() =>
+        toast({
+          title: 'Account created.',
+          description: "We've created an account for you.",
+          position: 'top',
+          status: 'success',
+          duration: 9000,
+          isClosable: true,
+        })
+      }>
+              SIGN UP
             </Button>
           </ModalFooter>
         </ModalContent>
       </Modal>
-       
+
+     
     </>
   );
 }
