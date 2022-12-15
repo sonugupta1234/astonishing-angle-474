@@ -44,11 +44,64 @@ import { HamburgerIcon, CloseIcon, ChevronDownIcon} from '@chakra-ui/icons';
 
 export default function Navbar() {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const [otp,setOtp]= useState(1256)
+  const [otpvalue,setOtpValue]=useState()
+  const toast1 = useToast()
+  const toast2=useToast()
+  
+
+
+  const verifyotp=()=>{
+  
+    if(otp==otpvalue)
+    {
+       toasting()
+    }else
+       toasted()
+    }
+  
+
+
+  const toasting=()=>{
+    toast1({
+      title: 'Login Successfull',
+      position: 'top',
+      status: 'success',
+      duration: 9000,
+      isClosable: true,
+    })
+
+  }
+
+    const toasted=()=>{
+      toast2({
+        title: 'Invalid Otp',
+        position: 'top',
+        status: 'error',
+        duration: 9000,
+        isClosable: true,
+      })
+  }
+
   const { 
     isOpen: isOpenModal, 
     onOpen: onOpenModal, 
     onClose: onCloseModal 
 } = useDisclosure()
+
+const { 
+  isOpen: isOpenloginModal, 
+  onOpen: onOpenloginModal, 
+  onClose: onCloseloginModal 
+} = useDisclosure()
+
+const { 
+  isOpen: isOpenotpModal, 
+  onOpen: onOpenotpModal, 
+  onClose: onCloseotpModal 
+} = useDisclosure()
+
+
   const [size, setSize] = useState('')
   const [placement, setPlacement] = useState('right')
   const [modalSize,setModalSize]=useState('lg')
@@ -142,7 +195,7 @@ export default function Navbar() {
                 />
               </MenuButton>
               <MenuList>
-                <MenuItem>SIGN IN</MenuItem>
+                <MenuItem onClick={onOpenloginModal}>SIGN IN</MenuItem>
                 <MenuItem onClick={onOpenModal}>SIGN UP</MenuItem>
                 
               </MenuList>
@@ -306,6 +359,121 @@ export default function Navbar() {
           </ModalFooter>
         </ModalContent>
       </Modal>
+
+
+
+
+
+      <Modal
+        initialFocusRef={initialRef}
+        finalFocusRef={finalRef}
+        onClose={onCloseloginModal}
+        isOpen={isOpenloginModal}
+        size={modalSize}
+      >
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>Sign In</ModalHeader>
+          <ModalCloseButton />
+          <DrawerFooter borderBottomWidth='1px'></DrawerFooter>
+
+          <ModalBody pb={6}>
+            
+            <Stack spacing={4}>
+            <HStack>
+             
+             <Box>
+            <FormControl>
+              <Select type="select" name="selectValue" onChange={handleChange} required>
+                <option value="+91">+91</option>
+                <option value="+97">+97</option>
+                <option value="+89">+89</option>
+              </Select>
+             
+            </FormControl>
+            </Box>
+
+            <Box>
+              <FormControl >
+              <Input width="175%" type="number" name="phone" value={formstate.phone} ref={initialRef} placeholder='Mobile Number' onChange={handleChange} required/>
+              
+              </FormControl>
+            </Box>
+            
+            </HStack>
+            
+
+          
+           
+            
+            
+            </Stack>
+            
+          </ModalBody>
+        
+          <ModalFooter>
+            
+            <Button onClick={onClose}>Cancel</Button>
+            <Button colorScheme='blue' ml={6} onClick={onOpenotpModal}>
+              VERIFY WITH OTP
+            </Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
+
+    
+
+
+
+
+          <Modal
+        initialFocusRef={initialRef}
+        finalFocusRef={finalRef}
+        onClose={onCloseotpModal}
+        isOpen={isOpenotpModal}
+        size={modalSize}
+      >
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>Sign In</ModalHeader>
+          <ModalCloseButton />
+          <DrawerFooter borderBottomWidth='1px'></DrawerFooter>
+
+          <ModalBody pb={6}>
+            
+            <Stack spacing={4}>
+            
+
+            <Box>
+              <FormControl >
+              <Input width="100%" type="number" name="phone" value={otpvalue} ref={initialRef} placeholder='Enter Otp' onChange={(e)=>setOtpValue(e.target.value)} required/>
+              
+              </FormControl>
+            </Box>
+            
+            
+            
+
+          
+           
+            
+            
+            </Stack>
+            
+          </ModalBody>
+        
+          <ModalFooter>
+            
+            <Button onClick={onClose}>Cancel</Button>
+            <Button colorScheme='blue' ml={6} onClick={verifyotp}>
+              SIGN IN
+            </Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
+
+        
+           
 
      
     </>
