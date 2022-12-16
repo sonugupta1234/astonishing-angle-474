@@ -48,7 +48,25 @@ export default function Navbar() {
   const [otpvalue,setOtpValue]=useState()
   const toast1 = useToast()
   const toast2=useToast()
+  const [userInfo,setUserInfo]=useState(false)
   
+  const { 
+    isOpen: isOpenModal, 
+    onOpen: onOpenModal, 
+    onClose: onCloseModal 
+} = useDisclosure()
+
+const { 
+  isOpen: isOpenloginModal, 
+  onOpen: onOpenloginModal, 
+  onClose: onCloseloginModal 
+} = useDisclosure()
+
+const { 
+  isOpen: isOpenotpModal, 
+  onOpen: onOpenotpModal, 
+  onClose: onCloseotpModal 
+} = useDisclosure()
 
 
   const verifyotp=()=>{
@@ -70,7 +88,9 @@ export default function Navbar() {
       duration: 9000,
       isClosable: true,
     })
-
+     onCloseotpModal()
+     onCloseloginModal()
+     setUserInfo(true)
   }
 
     const toasted=()=>{
@@ -83,31 +103,12 @@ export default function Navbar() {
       })
   }
 
-  const { 
-    isOpen: isOpenModal, 
-    onOpen: onOpenModal, 
-    onClose: onCloseModal 
-} = useDisclosure()
-
-const { 
-  isOpen: isOpenloginModal, 
-  onOpen: onOpenloginModal, 
-  onClose: onCloseloginModal 
-} = useDisclosure()
-
-const { 
-  isOpen: isOpenotpModal, 
-  onOpen: onOpenotpModal, 
-  onClose: onCloseotpModal 
-} = useDisclosure()
-
+  
 
   const [size, setSize] = useState('')
   const [placement, setPlacement] = useState('right')
   const [modalSize,setModalSize]=useState('lg')
   const toast = useToast()
-  
-
   
 
   const [formstate, setFormState]=useState({
@@ -158,6 +159,20 @@ const {
     onOpen()
   }
 
+  const handleform=()=>{
+    if(formstate.selectValue!=="" && formstate.phone!=="" && formstate.email!=="" && formstate.password!=="" && formstate.firstName!=="" && formstate.lastName!=="")
+    {
+      toast({
+        title: 'Account created.',
+        description: "We've created an account for you.",
+        position: 'top',
+        status: 'success',
+        duration: 9000,
+        isClosable: true,
+      })
+    }
+  }
+
   
 
   return (
@@ -180,6 +195,13 @@ const {
           <Box width="12%" >
           <Flex alignItems={'center'} >
             <Box>
+            {userInfo ? 
+                <Menu>
+                  <MenuButton variant={'link'} as={Button} color="white" rightIcon={<ChevronDownIcon />}>Sonu</MenuButton>
+                  <MenuList>
+                    <MenuItem>Logout</MenuItem>
+                    </MenuList>
+                </Menu> :
             <Menu>
               <MenuButton
                 as={Button}
@@ -187,6 +209,7 @@ const {
                 variant={'link'}
                 cursor={'pointer'}
                 minW={0}>
+              
                 <Avatar
                   size={'sm'}
                   src={
@@ -199,7 +222,7 @@ const {
                 <MenuItem onClick={onOpenModal}>SIGN UP</MenuItem>
                 
               </MenuList>
-              </Menu>
+              </Menu>}
               </Box>
               
           <Box>
@@ -344,16 +367,9 @@ const {
           <ModalFooter>
             
             <Button onClick={onClose}>Cancel</Button>
-            <Button colorScheme='blue' ml={6} type="submit" form="new-form"  onClick={() =>
-        toast({
-          title: 'Account created.',
-          description: "We've created an account for you.",
-          position: 'top',
-          status: 'success',
-          duration: 9000,
-          isClosable: true,
-        })
-      }>
+            <Button colorScheme='blue' ml={6} type="submit" form="new-form"  onClick={handleform}> 
+        
+      
               SIGN UP
             </Button>
           </ModalFooter>
@@ -413,7 +429,7 @@ const {
         
           <ModalFooter>
             
-            <Button onClick={onClose}>Cancel</Button>
+            <Button onClick={onCloseloginModal}>Cancel</Button>
             <Button colorScheme='blue' ml={6} onClick={onOpenotpModal}>
               VERIFY WITH OTP
             </Button>
@@ -464,7 +480,7 @@ const {
         
           <ModalFooter>
             
-            <Button onClick={onClose}>Cancel</Button>
+            <Button onClick={onCloseotpModal}>Cancel</Button>
             <Button colorScheme='blue' ml={6} onClick={verifyotp}>
               SIGN IN
             </Button>

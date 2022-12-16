@@ -19,7 +19,7 @@ function Top_Destination(){
     
     <Box>
       <Flex gap={6} justifyContent={'space-evenly'}>
-      <Link to="/Search">
+      <Link to="/search">
       <Box  sx={basicBoxStyles}>
         <Image filter="auto" brightness="40%" height= "230px" src="https://d2v8elt324ukrb.cloudfront.net/static/new_template/media/home-small/goa-11.f1c86735cec4.jpg" alt=""/>
         
