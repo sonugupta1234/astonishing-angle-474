@@ -30,7 +30,7 @@ import {
         w="90%"
         h="auto"
         // border="1px solid black"
-        m="auto"
+        mt="60px"
         mb="4rem"
       >
         <Tabs flexDirection={{ base: "column", lg: "row" }}>
