@@ -12,6 +12,8 @@ import {
   import React, {  useState } from "react";
   import { SearchIcon } from "@chakra-ui/icons";
 import { useRef } from "react";
+import { Link } from "react-router-dom";
+
   
   
 
@@ -153,7 +155,7 @@ function Searchbar_Homepage(){
                       type="date"
                       //ref={tagsInput}
                       placeholder="Check In"
-                      onFocus={handlefocus}
+                      onfocus={handlefocus}
                     ></Input>
                   </InputGroup>
                   <InputGroup>
@@ -182,7 +184,7 @@ function Searchbar_Homepage(){
                     <Input
                       borderRadius="none"
                       w="100%"
-                      type="date"
+                      type='date'
                       placeholder="Check Out"
                       onfocus="(this.type='date')"
                     ></Input>
@@ -248,9 +250,9 @@ function Searchbar_Homepage(){
                     <option value="option49">49 guests</option>
                     <option value="option50">50 guests</option>
                   </Select>
-                  <Button borderRadius="none" w="60%" colorScheme="blue">
+                  <Link to="/products"><Button borderRadius="none" w="100%" colorScheme="blue">
                     Search
-                  </Button>
+                  </Button></Link>
                   {/* </Box> */}
                 </Flex>
               </Box>

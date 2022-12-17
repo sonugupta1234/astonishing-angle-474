@@ -29,14 +29,31 @@ import { Link } from 'react-router-dom';
 
 function Products(){
     const [data,setData]=useState([])
+    const [result,setResult]=useState([])
     const { isOpen, onOpen, onClose } = useDisclosure()
 
     useEffect(()=>{
-     axios.get(' http://localhost:8000/results')
-     .then((res)=>{setData(res.data)})
+     axios.get(' https://rct-deployment.onrender.com/results')
+     .then((res)=>setData(res.data))
      .catch((err)=>console.log(err))
      
     },[])
+
+    const handleApply=()=>{
+      setData(result)
+    }
+
+    const getAscData=()=>{
+       axios.get(' https://rct-deployment.onrender.com/results?_sort=price&_order=asc')
+       .then((res)=> setResult(res.data))
+       .catch((err)=>console.log(err))
+    }
+
+    const getDscData=()=>{
+      axios.get(' https://rct-deployment.onrender.com/results?_sort=price&_order=desc')
+      .then((res)=> setResult(res.data))
+      .catch((err)=>console.log(err))
+   }
     return(
         <>
         <Navbar />
@@ -194,22 +211,27 @@ function Products(){
         <ModalContent>
            <Box width="100%">
               <Flex>
-                <Box>
+                <Box width="50%">
                  <Flex direction={'column'}>
                     <Heading fontWeight={'normal'}>Features</Heading>
-                    <Checkbox >Swimming Pool</Checkbox>
-                    <Checkbox>Air Conditioner</Checkbox>
-                    <Checkbox>Internet</Checkbox>
-                    <Checkbox> Gym</Checkbox>
+                    <Checkbox mt={6}>APARTMENT</Checkbox>
+                    <Checkbox>WIFI</Checkbox>
+                    <Checkbox>TV</Checkbox>
+                    <Checkbox>AC</Checkbox>
                  </Flex>
                 </Box>
-                <Box>
-
+                <Box width="50%">
+                  <Flex direction={'column'}>
+                    <Heading fontWeight={'normal'}>Price</Heading>
+                    <Checkbox mt={6} onChange={getAscData}>LOW TO HIGH</Checkbox>
+                    <Checkbox onChange={getDscData}>HIGH TO LOW</Checkbox>
+                  </Flex>
                 </Box>
               </Flex>
            </Box>
           <ModalFooter>
             <Button onClick={onClose}>Close</Button>
+            <Button ml={6} colorScheme="blue" onClick={ () => {handleApply(); onClose() }} >Apply(1)</Button>
           </ModalFooter>
         </ModalContent>
       </Modal>

@@ -1,5 +1,5 @@
 import {Flex,Box,Text,Image} from "@chakra-ui/react"
-
+import { Link } from "react-router-dom";
 function Vacation_Idea(){
    
 
@@ -20,14 +20,14 @@ function Vacation_Idea(){
       <Box  sx={basicBoxStyles}>
         <Image filter="auto" brightness="40%" height= "230px" src="https://d2v8elt324ukrb.cloudfront.net/static/new_template/media/home-small/goa-11.f1c86735cec4.jpg" alt=""/>
         
-        <Text
+        <Link to="/search"><Text
                   fontWeight="500"
                   position="relative"
                   color="white"
                   mt="-10rem"
                 >
                   Luxury Vacation in Goa
-                </Text>
+                </Text></Link>
                 
         
       </Box>
