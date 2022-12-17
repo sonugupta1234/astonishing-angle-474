@@ -34,7 +34,7 @@ import {
     };
   
     useEffect(() => {
-      axios.get(" http://localhost:8000/bodyPart").then((res) => {
+      axios.get("https://rct-deployment.onrender.com/bodyPart").then((res) => {
         setBodyPart(res.data);
       });
     }, []);

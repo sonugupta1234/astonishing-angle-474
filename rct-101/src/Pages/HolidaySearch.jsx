@@ -5,6 +5,7 @@ import {
   Box,
   Button,
   Flex,
+  FormControl,
   Image,
   Input,
   InputGroup,
@@ -86,7 +87,7 @@ function HolidaySearch () {
                 >
                   {/* <Box> */}
                   {/* Location Input */}
-                  <Flex
+                  {/* <Flex
                     // mb='-8.5rem'
                     direction="column"
                     h="auto"
@@ -95,7 +96,8 @@ function HolidaySearch () {
                     fontWeight="200"
                     w="100%"
                   >
-                    <InputGroup>
+                    
+                    <InputGroup >
                       <InputLeftElement
                         pointerEvents="none"
                         children={<SearchIcon color="gray.400" />}
@@ -116,7 +118,7 @@ function HolidaySearch () {
                    
                     
                   </Flex>
-  
+   */}
                   <InputGroup>
                     <InputLeftElement
                       pointerEvents="none"
@@ -128,7 +130,7 @@ function HolidaySearch () {
                           viewBox="0 0 20 20"
                           xmlns="http://www.w3.org/2000/svg"
                           data-svg="sign-in"
-                        >
+                        required>
                           <polygon
                             fill="grey"
                             points="7 2 17 2 17 17 7 17 7 16 16 16 16 3 7 3"
@@ -147,7 +149,7 @@ function HolidaySearch () {
                       type="date"
                       //ref={tagsInput}
                       placeholder="Check In"
-                      
+                      required
                     ></Input>
                   </InputGroup>
                   <InputGroup>
@@ -181,6 +183,7 @@ function HolidaySearch () {
                       onfocus="(this.type='date')"
                     ></Input>
                   </InputGroup>
+                
                   
                   <Select
                     placeholder="Select Guests"
