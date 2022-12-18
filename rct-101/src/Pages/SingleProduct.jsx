@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Box, Divider } from "@chakra-ui/react";
@@ -329,9 +329,9 @@ function SingleProduct(){
                   </Select>
                   
                   <Text mt={5}>Rateplan: Morning Breakfast (Continental Plan)</Text>
-                  <Button borderRadius="none" w="100%" mt={5} colorScheme="blue">
+                  <Link to="/checkout"><Button borderRadius="none" w="100%" mt={5} colorScheme="blue">
                     Request to Book
-                  </Button>
+                  </Button></Link>
                 
         </Flex>
       </Box>

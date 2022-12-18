@@ -36,7 +36,9 @@ import {
   Select,
   FormErrorMessage,
   FormHelperText,
-  useToast
+  useToast,
+  Text
+  
 } from '@chakra-ui/react';
 import { HamburgerIcon, CloseIcon, ChevronDownIcon} from '@chakra-ui/icons';
 
@@ -255,7 +257,7 @@ const {
           <DrawerBody textAlign={'center'}>
             
             <p>List New Property</p>
-            <p onClick={onOpenModal} cursor="pointer">Sign In to Your Dashboard</p>
+            <Text onClick={onOpenModal} cursor="pointer" >Sign In to Your Dashboard</Text>
             <DrawerFooter borderBottomWidth='1px'></DrawerFooter>
           </DrawerBody>
 
