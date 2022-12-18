@@ -1,0 +1,44 @@
+.devide{
+    display: flex;
+    gap: 50px;
+    /* font-size: larger; */
+}
+.useflx{
+    display: flex;
+    gap:20px;
+}
+.box>div{
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    padding: 60px 90px 60px 90px;
+    text-align: center;
+}
+.agree1{
+    border: 3px solid blue;
+    text-align:center;
+    padding: 20px 50px 20px 50px;
+    background-color: #1e87f0 ;
+    color:white;
+}
+
+@media only screen and (max-width: 992px){
+    .devide{
+        display: grid;
+        gap: 20px;
+    }
+    .useflx{
+        display: grid;
+        gap:10px;
+    }
+    .agree1{
+        border: 1px solid blue;
+        text-align:center;
+        /* padding: 10px 20px 10px 20px; */
+        background-color: #1e87f0 ;
+        color:white;
+    }
+    .box>div{
+        box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+        padding: 5px 10px 5px 10px;
+        text-align: center;
+    }
+}
