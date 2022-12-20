@@ -10,19 +10,19 @@ This Project is whole about Booking hotels Rooms when you go for a destination p
 
 ### `Tech Stack`
 
- Frontend- Chakra ui, React
- Backend- json server, vercel
+. Frontend- Chakra ui, React <br/>
+. Backend- json server, vercel 
 
 ### `Features`
 
--> list Property
--> Tabs Using Chakra ui
--> Drawer Using Chakra ui
--> Dropdown using Chakra ui
+. list Property<br/>
+. Tabs Using Chakra ui<br/>
+. Drawer Using Chakra ui<br/>
+. Dropdown using Chakra ui<br/>
 
 ### `Project Details`
 
-github link- https://github.com/sonugupta1234/astonishing-angle-474
-live link- https://rct-101-hxnlejto6-sonugupta1234.vercel.app/
+. github link- https://github.com/sonugupta1234/astonishing-angle-474 <br/>
+. live link- https://rct-101-hxnlejto6-sonugupta1234.vercel.app/ <br/>
 
 
