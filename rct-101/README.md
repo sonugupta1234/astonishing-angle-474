@@ -6,7 +6,7 @@ TRANQUIL LUXURY VILLA
 
 ### Description
 
-This Project is whole about Booking hotels Rooms when you go for a destination purpose. It was done by me within a span of 4 days..
+This Project is whole about Booking hotels Rooms when you go for a destination purpose. It was a solo project done within 6 days..
 
 ### `Tech Stack`
 
